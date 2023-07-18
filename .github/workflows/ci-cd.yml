@@ -31,8 +31,11 @@ jobs:
   cd-job:
     name: Continues Delivery
     needs: [ ci-job ]
-
     runs-on: ubuntu-latest
+    permissions:
+      # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
+
     steps:
 
       - name: SCM Checkout
@@ -44,11 +47,8 @@ jobs:
       - name: Build Artifacts
         run: just build
 
-      - name: PyPi Release
-        env:
-          POETRY_HTTP_BASIC_PYPI_USERNAME: "__token__"
-          POETRY_HTTP_BASIC_PYPI_PASSWORD: "${{ secrets.PYPI_TOKEN }}"
-        run: poetry publish
+      - name: Publish package to PyPi
+        uses: pypa/gh-action-pypi-publish@release/v1
 
       - name: GitHub Release
         env:
