@@ -1,9 +1,5 @@
-fmt:
-    black
-
 test:
     pytest -v
 
-
-report:
-    echo report
+build:
+    poetry build
