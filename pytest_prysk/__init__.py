@@ -1,14 +1,3 @@
-try:
-    import pytest
-except ImportError as ex:
-    error_msg = (
-        "Pytest not available, "
-        "make sure you install prysk using the extra [pytest-prysk].\n"
-        "For further details, see also "
-        "https://packaging.python.org/en/latest/tutorials/installing-packages/#installing-extras"
-    )
-    raise Exception(error_msg) from ex
-
 import os
 from collections import ChainMap
 from contextlib import ExitStack, contextmanager
@@ -16,6 +5,7 @@ from tempfile import TemporaryDirectory
 from typing import Iterable, Optional, Tuple, Union
 
 import prysk
+import pytest
 from _pytest._code import ExceptionInfo
 from _pytest._code.code import TerminalRepr
 from pytest import Collector
