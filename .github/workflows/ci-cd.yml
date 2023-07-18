@@ -16,8 +16,8 @@ jobs:
       - name: SCM Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Python & Poetry Environment
-        uses: ./.github/actions/python-environment
+      - name: Setup Environment
+        uses: ./.github/actions/env
 
       - name: Check Tag Version
         # make sure the pushed/created tag matched the project version
@@ -41,8 +41,8 @@ jobs:
       - name: SCM Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Python & Poetry Environment
-        uses: ./.github/actions/python-environment
+      - name: Setup Environment
+        uses: ./.github/actions/env
 
       - name: Build Artifacts
         run: just build

@@ -24,11 +24,8 @@ jobs:
       - name: SCM Checkout
         uses: actions/checkout@v3
 
-      - name: Setup task runner
-        uses: extractions/setup-just@v1
-
-      - name: Setup Python & Poetry Environment
-        uses: ./.github/actions/python-environment
+      - name: Setup Environment
+        uses: ./.github/actions/env
         with:
           python-version: ${{ matrix.python-version }}
 

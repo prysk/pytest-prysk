@@ -1,5 +1,5 @@
-name: 'SPPE'
-description: 'Setup python and poetry environment'
+name: 'SDE'
+description: 'Setup development environment'
 
 inputs:
 
@@ -31,3 +31,6 @@ runs:
     - name: Poetry install
       run: poetry install
       shell: bash
+
+    - name: Setup task runner
+      uses: extractions/setup-just@v1
