@@ -15,8 +15,8 @@ In order to install prysk with pytest support, the extra **pytest-plugin**,
 needs to be enabled. How this can be achieved depends or your package
 management tool. Here are some examples:
 
-* `pip install "prysk-pytest"`
-* `poetry add "pytest-prysk"`
+* `pip install prysk-pytest`
+* `poetry add pytest-prysk`
 
 
 ## How to run prysk tests with pytest
@@ -24,5 +24,5 @@ management tool. Here are some examples:
 Once you installed the pytest-prysk plugin, it will use pytest mechanisms to collect your prysk tests.
 So usually a simple `pytest` should do the trick.
 
-Attention: In case you want to prevent pytest from running any prysk test just pass :code:`-p no:prysk` to the pytest cli.
+Attention: In case you want to prevent pytest from running any prysk test just pass `-p no:prysk` to the pytest cli.
 
