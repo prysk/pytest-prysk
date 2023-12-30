@@ -93,7 +93,24 @@ def pytest_addoption(parser):
 
 
 def pytest_collect_file(parent, file_path):
-    if prysk.test.is_testfile(file_path):
+    def is_hidden(path):
+        """Check if a path (file/dir) is hidden or not."""
+
+        def _is_hidden(part):
+            return (
+                    part.startswith(".")
+                    and not part == "."
+                    and not part.startswith("..")
+                    and not part.startswith("./")
+            )
+
+        return any(map(_is_hidden, path.parts))
+
+    def is_a_prysk_file(path):
+        """Check if path is a valid prysk test file"""
+        return path.is_file() and path.suffix == ".t" and not is_hidden(path)
+
+    if is_a_prysk_file(file_path):
         return File.from_parent(parent, path=file_path)
 
 
@@ -128,9 +145,9 @@ class Item(pytest.Item):
             raise TestFailure(diff)
 
     def repr_failure(
-        self,
-        excinfo: ExceptionInfo[BaseException],
-        style: "Optional[_TracebackStyle]" = None,
+            self,
+            excinfo: ExceptionInfo[BaseException],
+            style: "Optional[_TracebackStyle]" = None,
     ) -> Union[str, TerminalRepr]:
         if excinfo.errisinstance(TestFailure):
             return b"".join(excinfo.value.args[0]).decode()
