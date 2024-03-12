@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pytest-prysk"
-version = "0.2.0"
+version = "0.3.0"
 authors = ["Nicola Coretti <nico.coretti@gmail.com>"]
 description = "Pytest plugin for prysk"
 repository = "https://github.com/prysk/pytest-prysk"
