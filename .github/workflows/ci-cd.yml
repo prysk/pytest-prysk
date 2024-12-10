@@ -5,6 +5,8 @@ on:
     tags:
       - '**'
 
+permissions: write
+
 jobs:
 
   check-tag-version-job:
