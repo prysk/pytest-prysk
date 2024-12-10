@@ -40,6 +40,11 @@ _OPTIONS = {
         "type": int,
         "help": "Number of spaces to use for indentation (default: %(default)s)",
     },
+    "dos2unix": {
+        "default": False,
+        "type": bool,
+        "help": "Whether or not to convert all DOS/Windows line endings to UNIX (default: %(default)s)",
+    },
 }
 
 
@@ -125,6 +130,7 @@ class Item(pytest.Item):
         self.add_marker("prysk")
         self.shell = options.prysk_shell
         self.indent = options.prysk_indent
+        self.dos2unix = options.prysk_dos2unix
 
     def runtest(self) -> None:
         with ExitStack() as context_stack:
@@ -134,7 +140,7 @@ class Item(pytest.Item):
                 environment(variables={"PRYSK_TEMP": tmpdir})
             )
             ins, outs, diff = prysk.test.testfile(
-                path=self.path, shell=self.shell, indent=self.indent
+                path=self.path, shell=self.shell, indent=self.indent, dos2unix=self.dos2unix
             )
 
         if outs is None and len(diff) == 0:
